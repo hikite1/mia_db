@@ -1,0 +1,103 @@
+Create the virtual envirinment - (run from 2-SQL folder)
+    Python's built in venv module to create a virtual environment
+        python3 -m venv venv
+        (make sure python:select interpreter is set to venv using View/Command Palette)
+        source venv/bin/activate
+
+    Install packages-
+        (put in a text file in your project folder requirements.txt)
+        alembic==1.6.5
+        Faker==8.5.1
+        Flask==2.0.1
+        Flask-Migrate==3.0.1
+        Flask-SQLAlchemy==2.5.1
+        psycopg2-binary==2.9.1
+        SQLAlchemy==1.4.17
+
+        install packages Command
+        python -m pip install -r requirements.txt
+
+    to view list of  -
+        pip list - shows list of installed packages
+        pip show <package name> - view details about a specific package
+
+    Flask setup commands-
+        unzip -q flask.zip - creates a folder named flask and extracts files in the folder .zip file 
+        rm flask.zip - removes the .zip file
+
+FLASK 
+    Set server environment (debug mode on) - export FLASK_ENV=development
+    To run virtual envirinment - flask run
+
+MIGRATIONS using alembic
+    SETUP
+        1. check if alembic is installed correctly - pip show alembic
+        2. makes a folder named alembic in the file path of terminal - mkdir alembic
+        3. opens current directory to alembic(or file stated) - cd alembic
+        4. initializes the folder alembic (or file stated)- alembic init alembic
+            versions/ is a folder where migrations files will be generated
+            README is a place for you to document any notes and/or code snippets.
+            env.py contains instructions for how Alembic should connect to the database.
+            script.py.mako is used by Alembic to generate migration files (which will be stored in the versions/ folder).
+            alembic.ini includes the settings for alembic. We will rely on the defaults for all settings except sqlalchemy.url.
+        5. edit the configuration/connection/logging settings in the alembic.ini file - sqlalchemy.url = postgresql://postgres@localhost/<database>
+
+    ALEMBIC CLI
+        alembic revision creates a new migration file in the versions folder and assigns it a "revision ID".
+        alembic upgrade <revision_id> applies migrations through the given ID.
+        alembic downgrade <revision_id> rolls back migrations through the given ID.
+        alembic history lists the migrations in order.
+        alembic current prints the revision ID for the current version of the database.
+        head is an alias for the latest migration.
+        base is an alias for the initial state (before all migrations).
+
+    GENERATE MIGRATION FILE
+        alembic revision -m "<table_name>"
+
+    FORWARD MIGRATION FUNCTION
+        def upgrade():
+            op.execute(
+            """
+            CREATE TABLE <table_name>(
+                table
+                columns
+                required
+                here
+            );
+            """
+        )
+
+    ROLLBACK MIGRATION FUNCTION
+        def downgrade():
+            op.execute(
+                """
+                DROP TABLE <table_name;
+                """
+            )
+
+    RUN THE FORWARD MIGRATION
+        alembic upgrade head
+
+    RUN THE ROLLBACK MIGRATION
+        alembic downgrade base
+
+
+CHECK DATABASE TABLES USING PSQL
+    enter psql CLI - docker exec -it pg_container psql -U postgres
+    connect ot database - \c <database>
+    list of database tables - \dt
+
+CLIENT - is anything that makes a request
+
+INSOMNIA - is the client for web server to flask and talks http
+
+FLASK - web(HTTP) server (create API)
+
+ALEMBIC - database schema migration tool that uses SQLAlchemy. It provides for CRUD scripts for a relational database to modify the existing schema of a database.
+   
+postgres is the database server does not talk http 
+
+pgAdmin client for database server for postgres talks postgres protocol
+
+Blueprint - template for generating a section of a web application (like a plaster mould). Can be applied to your application in several places. Each time you apply it will apply a new version of its structure in the application (plaster used in the mould)
+

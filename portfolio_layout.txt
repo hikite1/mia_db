@@ -1,0 +1,31 @@
+Missing Person OSINT  (Open Source Intelligence) ERD 
+
+
+missing_person_info = Entity, Primary Key
+	missing_person_info (one) – Name (one), Non Nullable, Participates 1 or more, Unique
+	missing_person_info (one)  – Age (one), Non Nullable, Participates 1 or more	  
+	missing_person_info (one)  – Description (many), Non Nullable, Participates 1 or more
+	missing_person_info (one) –  Aliases (many), Nullable, Participates 0 or more
+	missing_person_info (one)  –  Email (many), Nullable, Participates 0 or more
+	missing_person_info (one)  –  Last Sighting (many), Non Nullable, Participates 1 or more
+	missing_person_info (one)  –  Phone Numbers (many), Nullable, Participates 0 or more
+
+current_locations = Entity
+	current_locations  (one) – Addresses (many), Nullable, Participates 0 or more
+	current_locations  (one) – Employers (many), Nullable, Participates 0 or more
+	current_locations  (one) – Hangouts (many), Nullable, Participates 0 or more
+
+social_media = Entity
+	social_media (one) – Facebook (many), Nullable, Participates 0 or more
+	social_media (one) –  Instagram (many), Nullable, Participates 0 or more
+	social_media (one) –  Others (many), Nullable, Participates 0 or more
+	social_media (one) –  Snapchat (many), Nullable, Participates 0 or more
+
+connections = Entity
+	connections (one) -  Children (many), Nullable, Participates 0 or more
+	connections (one) - Family (many), Nullable, Participates 0 or more
+	connections (one) -  Friends (many), Nullable, Participates 0 or more
+	connections (one) -  Guardians (many), Nullable, Participates 0 or more
+	connections (one) -  Siblings (many), Nullable, Participates 0 or more
+	connections (one) – Spouse (many), Nullable, Participates 0 or more
+	
